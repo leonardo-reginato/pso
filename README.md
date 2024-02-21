@@ -1,5 +1,5 @@
 # Particle Swarm Optimization
-
+![Tests](https://github.com/leonardo-reginato/pso/actions/workflows/tests.yml/badge.svg)
 This Python class implements the Particle Swarm Optimization (PSO) algorithm for optimizing any given cost function. PSO is a population-based stochastic optimization algorithm inspired by the social behavior of birds flocking or fish schooling.
 
 ## Installation
