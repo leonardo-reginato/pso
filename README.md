@@ -3,8 +3,21 @@
 
 This Python class implements the Particle Swarm Optimization (PSO) algorithm for optimizing any given cost function. PSO is a population-based stochastic optimization algorithm inspired by the social behavior of birds flocking or fish schooling.
 
+## Requirements
+```bash
+python: > 3.9
+```
+
 ## Installation
-To use this PSO optimizer, simply include the provided ParticleSwarmOptimizer class in your Python project.
+1. Clone the repository:
+```bash
+git clone https://github.com/leonardo-reginato/pso.git
+```
+2. Install as package in your environment for easy usage
+```bash
+pip install -e .
+```
+3. After instalation, the application is ready to use
 
 ## Usage
 1. Import the PSO optimizer, follow these steps:
