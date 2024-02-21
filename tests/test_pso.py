@@ -4,13 +4,17 @@ from pso.optimizer import PSO
 
 
 class TestParticleSwarmOptimizer(unittest.TestCase):
+    
+    def cost_function(self, x):
+        return sum(x)
+    
     def test_initialization(self):
         # Test initialization of ParticleSwarmOptimizer
-        def cost_function(x):
-            return sum(x)
-
         pso = PSO(
-            cost_function=cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
+            cost_function=self.cost_function, 
+            nvars=2, 
+            min_vars=[0, 0], 
+            max_vars=[1, 1]
         )
 
         self.assertIsNotNone(pso)
@@ -18,35 +22,70 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         self.assertEqual(len(pso.max_vars), 2)
         self.assertEqual(pso.npop, 2)
 
-    def test_optimization(self):
+    def test_optimization_min(self):
         # Test optimization with a simple cost function (minimization)
-        cost_function = lambda x: sum(x)
-        pso = ParticleSwarmOptimizer(
-            cost_function=cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
+        pso = PSO(
+            cost_function=self.cost_function, 
+            nvars=2, 
+            min_vars=[0, 0], 
+            max_vars=[1, 1], 
+            npop=15, 
+            interation_limit=10,
+            maximization=False
         )
         best_solution = pso.executer()
 
         self.assertIsNotNone(best_solution)
-        self.assertAlmostEqual(best_solution["cost"], 0.0, places=5)
-
-    def test_output(self):
-        # Test if output files are saved properly
-        cost_function = lambda x: sum(x)
-        pso = ParticleSwarmOptimizer(
-            cost_function=cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
+        self.assertAlmostEqual(best_solution["cost"], 0.0, places=10)
+        
+    def test_optimization_max(self):
+        # Test optimization with a simple cost function (minimization)
+        pso = PSO(
+            cost_function=self.cost_function, 
+            nvars=2, 
+            min_vars=[0, 0], 
+            max_vars=[1, 1], 
+            npop=15, 
+            interation_limit=10,
+            maximization=True
         )
         best_solution = pso.executer()
 
+        self.assertIsNotNone(best_solution)
+        self.assertAlmostEqual(best_solution["cost"], 2.0, places=10)
+
+    def test_output(self):
+        # Test if output files are saved properly
+        pso = PSO(
+            cost_function=self.cost_function,
+            nvars=2,
+            min_vars=[0, 0],
+            max_vars=[1, 1],
+            npop=2,
+            interation_limit=5,
+            maximization=False,
+        )
+        
+        pso.executer()
+
         # Assuming output files are saved in the current directory
-        self.assertTrue(os.path.exists("position_cost_result.csv"))
-        self.assertTrue(os.path.exists("iteration_plot.png"))
+        self.assertTrue(
+            os.path.exists(os.getcwd() + "/output/position_cost_result.csv")
+        )
+        self.assertTrue(os.path.exists(os.getcwd() + "/output/iteration_plot.png"))
 
     def test_bounds(self):
         # Test if particle positions are within specified bounds
-        cost_function = lambda x: sum(x)
-        pso = ParticleSwarmOptimizer(
-            cost_function=cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
+        pso = PSO(
+            cost_function=self.cost_function,
+            nvars=2,
+            min_vars=[0, 0],
+            max_vars=[1, 1],
+            npop=2,
+            interation_limit=5,
+            maximization=False,
         )
+
         best_solution = pso.executer()
         positions = best_solution["position"]
 
@@ -55,14 +94,20 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
 
     def test_global_best(self):
         # Test if the global best solution is correctly updated
-        cost_function = lambda x: sum(x)
-        pso = ParticleSwarmOptimizer(
-            cost_function=cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
+        pso = PSO(
+            cost_function=self.cost_function,
+            nvars=2,
+            min_vars=[0, 0],
+            max_vars=[1, 1],
+            npop=15,
+            interation_limit=10,
+            maximization=False,
         )
+
         best_solution = pso.executer()
 
         # Assuming minimization problem, global best cost should be close to 0
-        self.assertAlmostEqual(best_solution["cost"], 0.0, places=5)
+        self.assertAlmostEqual(best_solution["cost"], 0.0, places=10)
 
 
 if __name__ == "__main__":

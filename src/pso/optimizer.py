@@ -53,6 +53,8 @@ class PSO:
         cols = [f"value{q}" for q in range(nvars)]
         cols.append("cost")
         self.df_results = pd.DataFrame(columns=cols)
+        
+        os.makedirs(output_path, exist_ok=True)
 
     def save_particle_cost_csv(self, data: list) -> None:
         cols = [f"value{q}" for q in range(self.nvars)]
