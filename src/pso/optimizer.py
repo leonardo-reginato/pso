@@ -13,6 +13,7 @@ logging.basicConfig(
     stream=sys.stdout,
 )
 
+
 class PSO:
     def __init__(
         self,
