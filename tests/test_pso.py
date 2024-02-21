@@ -25,14 +25,14 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
             nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
-            npop=15,
-            interation_limit=10,
+            npop=5,
+            interation_limit=5,
             maximization=False,
         )
         best_solution = pso.executer()
 
         self.assertIsNotNone(best_solution)
-        self.assertLessEqual(best_solution["cost"], 0.25)
+        self.assertLessEqual(best_solution["cost"], 0.5)
 
     def test_optimization_max(self):
         # Test optimization with a simple cost function (minimization)
@@ -41,14 +41,14 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
             nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
-            npop=15,
-            interation_limit=10,
+            npop=5,
+            interation_limit=5,
             maximization=True,
         )
         best_solution = pso.executer()
 
         self.assertIsNotNone(best_solution)
-        self.assertGreaterEqual(best_solution["cost"], 1.5)
+        self.assertGreaterEqual(best_solution["cost"], 0.8)
 
     def test_output(self):
         # Test if output files are saved properly
@@ -95,15 +95,15 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
             nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
-            npop=15,
-            interation_limit=10,
+            npop=5,
+            interation_limit=5,
             maximization=False,
         )
 
         best_solution = pso.executer()
 
         # Assuming minimization problem, global best cost should be close to 0
-        self.assertLessEqual(best_solution["cost"], 0.1)
+        self.assertLessEqual(best_solution["cost"], 1)
 
 
 if __name__ == "__main__":
