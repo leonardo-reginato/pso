@@ -8,7 +8,7 @@ To use this PSO optimizer, simply include the provided ParticleSwarmOptimizer cl
 ## Usage
 1. Import the PSO optimizer, follow these steps:
 ```python
-from pso import ParticleSwarmOptimizer as PSO
+from pso.optimizer import PSO
 ```
 2. Define your cost function. It should take a list of parameters as input and return a single scalar value representing the cost:
 
@@ -45,7 +45,7 @@ The optimizer provides various output methods such as saving particle positions 
 ## Example
 Here's a simple example demonstrating the usage of the PSO optimizer:
 ```python
-from particle_swarm_optimizer import ParticleSwarmOptimizer as PSO
+from pso.optimizer import PSO
 
 def sphere_function(params):
     return sum(p**2 for p in params)
