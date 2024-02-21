@@ -19,7 +19,7 @@ def my_cost_function(params:list | tuple) -> float:
 ```
 3. Initialize the PSO optimizer with appropriate parameters:
 ```python
-pso = ParticleSwarmOptimizer(cost_function=my_cost_function, nvars=10, min_vars=[0]*10, max_vars=[1]*10)
+pso = PSO(cost_function=my_cost_function, nvars=10, min_vars=[0]*10, max_vars=[1]*10)
 ```
 4. Execute the optimization:
 ```python
@@ -45,12 +45,12 @@ The optimizer provides various output methods such as saving particle positions 
 ## Example
 Here's a simple example demonstrating the usage of the PSO optimizer:
 ```python
-from particle_swarm_optimizer import ParticleSwarmOptimizer
+from particle_swarm_optimizer import ParticleSwarmOptimizer as PSO
 
 def sphere_function(params):
     return sum(p**2 for p in params)
 
-pso = ParticleSwarmOptimizer(cost_function=sphere_function, nvars=3, min_vars=[-5]*3, max_vars=[5]*3)
+pso = PSO(cost_function=sphere_function, nvars=3, min_vars=[-5]*3, max_vars=[5]*3)
 best_solution = pso.executer()
 ```
 ## License
