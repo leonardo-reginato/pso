@@ -1,14 +1,17 @@
 import os
-import logging.config
+import sys
+import logging
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
-logging.config.fileConfig(
-    os.path.dirname(os.path.abspath(__file__)) + "/logging_config.ini"
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    stream=sys.stdout,
 )
-
 
 class PSO:
     def __init__(
@@ -53,7 +56,6 @@ class PSO:
         cols = [f"value{q}" for q in range(nvars)]
         cols.append("cost")
         self.df_results = pd.DataFrame(columns=cols)
-        
         os.makedirs(output_path, exist_ok=True)
 
     def save_particle_cost_csv(self, data: list) -> None:
