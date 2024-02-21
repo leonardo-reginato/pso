@@ -2,32 +2,29 @@ import os
 import logging.config
 import numpy as np
 import pandas as pd
-from datetime import datetime
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score as r2
-from sklearn.metrics import mean_squared_error as mse
-from sklearn.metrics import mean_absolute_percentage_error as mape
 
 
 logging.config.fileConfig(
     os.path.dirname(os.path.abspath(__file__)) + "/logging_config.ini"
 )
 
+
 class ParticleSwarmOptimizer:
     def __init__(
         self,
         cost_function,
+        max_vars: list[float],
+        min_vars: list[float],
         maximization: bool = True,
         nvars: int = None,
-        min_vars: list = [],
-        max_vars: list = [],
         npop: int = 2,
         interation_limit: int = 2,
         kappa: int = 1,
-        phis: list = [2, 2],
+        phis: list[int] = [2, 2],
         wdamp: int = 1,
         info_display: bool = False,
-        output_path: str = "",
+        output_path: str = "output",
     ) -> None:
         self.cost_function = cost_function
         self.maximization = maximization
@@ -65,20 +62,30 @@ class ParticleSwarmOptimizer:
             f"{self.output_path}/position_cost_result.csv", float_format="%.2f"
         )
 
-    def draw_scatter_plot(self, values_list, title="PSO - Iterations Display", x_label="Iteration", y_label="Cost"):
+    def draw_scatter_plot(
+        self,
+        values_list,
+        title="PSO - Iterations Display",
+        x_label="Iteration",
+        y_label="Cost",
+    ):
         x_values = []
         y_values = []
 
         for idx, value in enumerate(values_list):
-            x_values.append(idx+1)
+            x_values.append(idx + 1)
             y_values.append(value)
 
         # plt.ion()  # Turn on interactive mode
 
         if self.maximization:
-            optmum_y_index = y_values.index(max(y_values))  # Find the index of the max y value
+            optmum_y_index = y_values.index(
+                max(y_values)
+            )  # Find the index of the max y value
         else:
-            optmum_y_index = y_values.index(min(y_values))  # Find the index of the min y value
+            optmum_y_index = y_values.index(
+                min(y_values)
+            )  # Find the index of the min y value
         colors = [
             "orange" if i == optmum_y_index else "gray" for i in range(len(x_values))
         ]  # Set color to red for max y value
@@ -91,7 +98,9 @@ class ParticleSwarmOptimizer:
         plt.grid(True)
         # plt.show()
         # plt.pause(0.05)  # Pause to allow time for the plot to be displayed
-        plt.savefig(f"{self.output_path}/iteration_plot.png", dpi=300, bbox_inches="tight")
+        plt.savefig(
+            f"{self.output_path}/iteration_plot.png", dpi=300, bbox_inches="tight"
+        )
 
     def initialize_global_best(self) -> list:
         global_best = {}
@@ -195,7 +204,7 @@ class ParticleSwarmOptimizer:
                 it_data.append(particle[i]["cost"])
                 all_data.append(it_data)
 
-                all_cost.append(particle[i]['cost'])
+                all_cost.append(particle[i]["cost"])
                 self.draw_scatter_plot(all_cost)
 
                 # Update particle and global bests
@@ -206,29 +215,3 @@ class ParticleSwarmOptimizer:
         self.save_particle_cost_csv(all_data)
 
         return global_best
-
-
-#if __name__ == "__main__":
-#    # Define the cost function
-#    def cost_function(param):
-#        return (param[0] - param[1] * 2) ** 2 + param[2] + (param[3]) ** 3
-#
-#    os.makedirs(
-#        os.path.dirname(os.path.abspath(__file__)) + "/../output",
-#        exist_ok=True,
-#    )
-#
-#    global_best = ParticleSwarmOptimizer(
-#        cost_function=cost_function,
-#        maximization=False,
-#        nvars=4,
-#        min_vars=[1, 1, 10, 10],
-#        max_vars=[99, 99, 50, 50],
-#        npop=10,
-#        interation_limit=10,
-#        kappa=1,
-#        phis=[2, 2],
-#        wdamp=1,
-#        info_display=False,
-#        output_path=os.path.dirname(os.path.abspath(__file__)) + "/../output",
-#    ).executer()
