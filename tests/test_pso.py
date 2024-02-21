@@ -1,6 +1,6 @@
 import unittest
 import os
-from pso import ParticleSwarmOptimizer
+from pso.optimizer import PSO
 
 
 class TestParticleSwarmOptimizer(unittest.TestCase):
@@ -9,7 +9,7 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         def cost_function(x):
             return sum(x)
 
-        pso = ParticleSwarmOptimizer(
+        pso = PSO(
             cost_function=cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
         )
 

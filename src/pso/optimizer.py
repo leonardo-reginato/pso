@@ -10,7 +10,7 @@ logging.config.fileConfig(
 )
 
 
-class ParticleSwarmOptimizer:
+class PSO:
     def __init__(
         self,
         cost_function,
