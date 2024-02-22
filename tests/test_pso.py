@@ -96,7 +96,7 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
             min_vars=[0, 0],
             max_vars=[1, 1],
             npop=5,
-            interation_limit=5,
+            interation_limit=10,
             maximization=False,
         )
 
