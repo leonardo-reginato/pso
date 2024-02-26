@@ -35,7 +35,7 @@ def my_cost_function(var1:float, var2:float) -> float:
 ```
 3. Initialize the PSO optimizer with appropriate parameters:
 ```python
-pso = PSO(cost_function=my_cost_function, nvars=10, min_vars=[0]*10, max_vars=[1]*10)
+pso = PSO(cost_function=my_cost_function, min_vars=[0]*2, max_vars=[1]*2)
 ```
 4. Execute the optimization:
 ```python
@@ -45,7 +45,6 @@ best_solution = pso.executer()
 ## Parameters
 - cost_function: Your cost function that you want to minimize (or maximize if maximization is set to True).
 - maximization: Boolean indicating whether the optimization is a maximization problem (default is True).
-- nvars: The number of variables in the optimization problem.
 - min_vars, max_vars: Lists defining the lower and upper bounds for each variable.
 - npop: The number of particles in the swarm.
 - interation_limit: The maximum number of iterations for optimization.
