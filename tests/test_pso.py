@@ -4,8 +4,8 @@ from pso.optimizer import PSO
 
 
 class TestParticleSwarmOptimizer(unittest.TestCase):
-    def cost_function(self, x):
-        return sum(x)
+    def cost_function(self, x, y):
+        return x + y
 
     def test_initialization(self):
         # Test initialization of ParticleSwarmOptimizer

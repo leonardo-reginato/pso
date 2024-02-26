@@ -200,7 +200,8 @@ class PSO:
                     pass
 
                 # ------------------------------------- Evaluation ------------------------------------- #
-                particle[i]["cost"] = self.cost_function(particle[i]["position"])
+                param = list(particle[i]["position"])
+                particle[i]["cost"] = self.cost_function(*param)
                 logging.info(
                     f"Iteration {it+1} / Indivudual: {i+1}/{self.npop} / Particle Cost: {particle[i]['cost']:,.3}"
                 )

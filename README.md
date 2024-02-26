@@ -27,9 +27,9 @@ from pso.optimizer import PSO
 2. Define your cost function. It should take a list of parameters as input and return a single scalar value representing the cost:
 
 ```python
-def my_cost_function(params:list | tuple) -> float:
+def my_cost_function(var1:float, var2:float) -> float:
     # Your implementation here
-    pass
+    return sum(var1, var2)
 ```
 3. Initialize the PSO optimizer with appropriate parameters:
 ```python
