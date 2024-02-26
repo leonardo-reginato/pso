@@ -10,7 +10,7 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
     def test_initialization(self):
         # Test initialization of ParticleSwarmOptimizer
         pso = PSO(
-            cost_function=self.cost_function, nvars=2, min_vars=[0, 0], max_vars=[1, 1]
+            cost_function=self.cost_function, min_vars=[0, 0], max_vars=[1, 1]
         )
 
         self.assertIsNotNone(pso)
@@ -22,7 +22,6 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         # Test optimization with a simple cost function (minimization)
         pso = PSO(
             cost_function=self.cost_function,
-            nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
             npop=5,
@@ -38,7 +37,6 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         # Test optimization with a simple cost function (minimization)
         pso = PSO(
             cost_function=self.cost_function,
-            nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
             npop=5,
@@ -54,7 +52,6 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         # Test if output files are saved properly
         pso = PSO(
             cost_function=self.cost_function,
-            nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
             npop=2,
@@ -74,7 +71,6 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         # Test if particle positions are within specified bounds
         pso = PSO(
             cost_function=self.cost_function,
-            nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
             npop=2,
@@ -92,7 +88,6 @@ class TestParticleSwarmOptimizer(unittest.TestCase):
         # Test if the global best solution is correctly updated
         pso = PSO(
             cost_function=self.cost_function,
-            nvars=2,
             min_vars=[0, 0],
             max_vars=[1, 1],
             npop=5,

@@ -21,7 +21,6 @@ class PSO:
         max_vars: list[float],
         min_vars: list[float],
         maximization: bool = True,
-        nvars: int = None,
         npop: int = 2,
         interation_limit: int = 2,
         kappa: int = 1,
@@ -32,7 +31,7 @@ class PSO:
     ) -> None:
         self.cost_function = cost_function
         self.maximization = maximization
-        self.nvars = nvars
+        self.nvars = len(max_vars)
         self.min_vars = np.array(min_vars)
         self.max_vars = np.array(max_vars)
         self.npop = npop
@@ -54,7 +53,7 @@ class PSO:
         self.max_velocity = 0.2 * (self.max_vars - self.min_vars)
         self.min_velocity = -self.max_velocity
 
-        cols = [f"value{q}" for q in range(nvars)]
+        cols = [f"value{q}" for q in range(self.nvars)]
         cols.append("cost")
         self.df_results = pd.DataFrame(columns=cols)
         os.makedirs(output_path, exist_ok=True)

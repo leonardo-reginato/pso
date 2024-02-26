@@ -29,7 +29,7 @@ from pso.optimizer import PSO
 ```python
 def my_cost_function(var1:float, var2:float) -> float:
     # Your implementation here
-    return sum(var1, var2)
+    return var1 + var2
 ```
 3. Initialize the PSO optimizer with appropriate parameters:
 ```python
