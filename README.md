@@ -17,7 +17,7 @@ git clone https://github.com/leonardo-reginato/pso.git
 ```
 2. Install as package in your environment for easy usage
 ```bash
-pip install -e .
+pip install .
 ```
 3. After instalation, the application is ready to use
 
@@ -63,8 +63,8 @@ Here's a simple example demonstrating the usage of the PSO optimizer:
 ```python
 from pso.optimizer import PSO
 
-def sphere_function(params):
-    return sum(p**2 for p in params)
+def sphere_function(var1, var2):
+    return var1 - var2**2
 
 pso = PSO(cost_function=sphere_function, nvars=3, min_vars=[-5]*3, max_vars=[5]*3)
 best_solution = pso.executer()
